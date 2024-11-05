@@ -8,7 +8,12 @@ Pattern: Strategy
 * Lets algo vary independently from clients which use it
 */
 
-import "github.com/k-cao/design-patterns-golang/strategy/ducks"
+import (
+	"fmt"
+
+	"github.com/k-cao/design-patterns-golang/strategy/ducks"
+	"github.com/k-cao/design-patterns-golang/strategy/implementations"
+)
 
 func main() {
 	mallard := ducks.NewMallardDuck()
@@ -23,4 +28,22 @@ func main() {
 		duck.Display()
 		duck.Swim()
 	}
+
+	fmt.Println("Runtime behavioral changes below:")
+
+	// Change behavior at runtime.
+	dynamicDuck := ducks.Duck{}
+	dynamicDuck.SetFly(&implementations.FlyWithWings{})
+	dynamicDuck.SetQuack(&implementations.Squeak{})
+
+	dynamicDuck.Quack()
+	dynamicDuck.Fly()
+	dynamicDuck.Swim()
+
+	dynamicDuck.SetFly(&implementations.FlyNoWay{})
+	dynamicDuck.SetQuack(&implementations.Mute{})
+
+	dynamicDuck.Quack()
+	dynamicDuck.Fly()
+	dynamicDuck.Swim()
 }

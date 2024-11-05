@@ -28,3 +28,11 @@ func (d *Duck) Swim() {
 func (d *Duck) Display() {
 	d.displayImplementation()
 }
+
+func (d *Duck) SetFly(b behaviors.FlyBehavior) {
+	d.flyBehavior = b
+}
+
+func (d *Duck) SetQuack(b behaviors.QuackBehavior) {
+	d.quackBehavior = b
+}
